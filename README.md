@@ -52,7 +52,7 @@
 
 ---
 
-Text-Driven Image Segmentation (SAM 2)
+#Text-Driven Image Segmentation (SAM 2)
 
 How to run in Colab
 -------------------
