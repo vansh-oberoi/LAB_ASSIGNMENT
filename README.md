@@ -52,32 +52,31 @@
 
 ---
 
-# Q2 — Text-Driven Image Segmentation (SAM 2)
+Q2 — Text-Driven Image Segmentation (SAM 2)
+How to run in Colab
+Open q2.ipynb.
+Go to Runtime → Change runtime type → GPU.
+Run all cells in order.
+Use either the sample demo or upload your own image and provide a text prompt.
 
-## How to run in Colab
+Pipeline
 
-1. Open `q2.ipynb`.
-2. Set Runtime → GPU.
-3. Run all cells to perform text-prompted segmentation.
-
-## Pipeline
-
-1. Load image.  
-2. Accept text prompt for object selection.  
-3. Convert text → region seeds (via CLIPSeg / GroundingDINO / GLIP).  
-4. Feed seeds into **SAM 2** to generate mask.  
-5. Display final mask overlay.
-
-## Notes / Limitations
-
-- Works for **single images**.  
-- Mask quality depends on prompt specificity.  
-- Optional video extension can propagate masks across frames (bonus).
-
----
-
-**Submission Instructions**
-
-- Both notebooks must execute top-to-bottom in Colab GPU.  
-- Repo should contain only: `q1.ipynb`, `q2.ipynb`, `README.md`.  
-- Submit your **best test accuracy** (82.67%) via Google Form with repo link.
+Load image
+From URL or upload from local storage.
+Text → Bounding Boxes
+Uses OwlViT (zero-shot object detection) from HuggingFace Transformers.
+Detects regions based on the text prompt.
+Bounding Boxes → Masks
+Each detected box is refined by SAM 2 (Segment Anything v2, Hiera Large checkpoint).
+Generates segmentation masks.
+Visualization
+Overlays masks on the image with color blending.
+Supports viewing original image, bounding boxes, and final mask overlay.
+Multi-object Segmentation (Bonus)
+Accepts multiple text prompts (e.g., "person", "dog", "car").
+Applies distinct colors for each class.
+Notes / Limitations
+Designed for single images (no video propagation implemented).
+Performance depends on prompt specificity and OwlViT detection accuracy.
+Supports multiple objects but may merge overlapping masks.
+Requires GPU runtime for practical speed.
