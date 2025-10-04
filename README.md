@@ -53,29 +53,35 @@
 ---
 
 Text-Driven Image Segmentation (SAM 2)
+
 How to run in Colab
-Open q2.ipynb in Google Colab.
-Set Runtime → Change runtime type → GPU.
-Run all cells top-to-bottom.
-Use either the sample demo image or upload your own image and enter a text prompt.
+-------------------
+1. Open `q2.ipynb` in Google Colab.
+2. Set Runtime → Change runtime type → GPU.
+3. Run all cells top-to-bottom.
+4. Use either the sample demo image or upload your own image and enter a text prompt.
 
 Pipeline
-
-Step	Description
-Load Image	Load from URL or upload from local storage.
-Text → Bounding Boxes	Uses OwlViT (zero-shot object detection) to detect regions based on text prompt.
-Bounding Boxes → Masks	Refined by SAM 2 (Segment Anything v2, Hiera Large checkpoint) to generate segmentation masks.
-Visualization	Overlays masks with color blending; displays original image, bounding boxes, and mask overlay.
-Multi-Object Segmentation (Bonus)	Accepts multiple text prompts (e.g., "person", "dog", "car") and assigns distinct colors per class.
+--------
+Step                     Description
+------------------------------------------------------------
+Load Image               Load from URL or upload from local storage.
+Text → Bounding Boxes    Uses OwlViT (zero-shot object detection) to detect regions based on text prompt.
+Bounding Boxes → Masks   Refined by SAM 2 (Segment Anything v2, Hiera Large checkpoint) to generate segmentation masks.
+Visualization            Overlays masks with color blending; displays original image, bounding boxes, and mask overlay.
+Multi-Object Segmentation Accepts multiple text prompts (e.g., "person", "dog", "car") and assigns distinct colors per class.
 
 Notes / Limitations
-Works for single images (no video support).
-Mask quality depends on prompt specificity and OwlViT detection accuracy.
-Supports multiple objects, but overlapping regions may merge.
-Requires GPU runtime for practical speed.
+-------------------
+- Works for single images (no video support).
+- Mask quality depends on prompt specificity and OwlViT detection accuracy.
+- Supports multiple objects, but overlapping regions may merge.
+- Requires GPU runtime for practical speed.
+
 Short Analysis
-Text-to-box step: OwlViT allows segmentation without manual clicks, enabling text-driven interaction.
-SAM 2 refinement: Produces sharper and more precise masks from bounding boxes.
-Multi-object extension: Demonstrates scalability with prompts like "dog" + "car" in the same scene.
-Limitations: Dependent on text-prompt accuracy; may miss small/ambiguous objects.
-Future improvements: Add video mask propagation, use stronger grounding models (e.g., GroundingDINO).
+--------------
+- Text-to-box step: OwlViT allows segmentation without manual clicks, enabling text-driven interaction.
+- SAM 2 refinement: Produces sharper and more precise masks from bounding boxes.
+- Multi-object extension: Demonstrates scalability with prompts like "dog" + "car" in the same scene.
+- Limitations: Dependent on text-prompt accuracy; may miss small/ambiguous objects.
+- Future improvements: Add video mask propagation, use stronger grounding models (e.g., GroundingDINO).
